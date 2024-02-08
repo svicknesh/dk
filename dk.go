@@ -31,13 +31,13 @@ const (
 func New(lock, key []byte) (dk *DK, err error) {
 
 	// create new instance of argon2id with our custom parameters
-	k, err := kdf.New(kdf.ARGON2ID, kdf.Config{ConfigArgon2ID: kdf.ConfigArgon2ID{
+	k, err := kdf.New(&kdf.ConfigArgon2ID{
 		Memory:      64 * 1024,
 		Iterations:  3,
 		Parallelism: 4,
 		SaltLength:  saltLength,
 		KeyLength:   32,
-	}})
+	})
 	if nil != err {
 		return nil, fmt.Errorf("newdk: %w", err)
 	}
