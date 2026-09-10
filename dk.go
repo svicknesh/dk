@@ -6,7 +6,7 @@ import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/svicknesh/kdf"
+	"github.com/svicknesh/kdf/v2"
 	"golang.org/x/crypto/blake2b"
 	"golang.org/x/crypto/sha3"
 )
@@ -59,8 +59,12 @@ func New(lock, key []byte) (dk *DK, err error) {
 	input.Write(lock)
 
 	// derive the key using these new inputs
-	k.SetSalt(saltSum[:saltLength])
-	k.Generate(input.Sum(nil))
+	if err = k.SetSalt(saltSum[:saltLength]); nil != err {
+		return nil, fmt.Errorf("newdk: %w", err)
+	}
+	if err = k.Generate(input.Sum(nil)); nil != err {
+		return nil, fmt.Errorf("newdk: %w", err)
+	}
 
 	// save this
 	dk = new(DK)

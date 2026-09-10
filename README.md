@@ -38,7 +38,7 @@ Assume the `lock` is the email, and `key` is the password.
 2. Write the bytes of `lock` into this `blake2b` instance.
 3. Write the bytes of `key` into this `blake2b` instance.
 4. Take the first 16 bytes of this result as `salt`.
-5. Create new `hmac` instance using `sha3-384` and `key` as the key.
+5. Create new `hmac` instance using `sha3-256` and `key` as the key.
 6. Write the bytes of `lock` into this `hmac` instance.
 7. The result of this will be the input to be fed into `argon2id`.
 8. Create new `argon2id` instance with the following parameters

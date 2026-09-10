@@ -5,7 +5,7 @@ go 1.23.0
 toolchain go1.23.4
 
 require (
-	github.com/svicknesh/kdf v1.2.1
+	github.com/svicknesh/kdf/v2 v2.0.0
 	golang.org/x/crypto v0.35.0
 )
 
